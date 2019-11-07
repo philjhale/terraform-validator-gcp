@@ -1,0 +1,33 @@
+substitutions:
+  _TERRAFORM_VERSION: latest
+  _TERRFORM_VALIDATOR_VERSION: latest
+steps:
+- id: 'tf-init'
+  name: 'gcr.io/${PROJECT_ID}/terraform:${_TERRAFORM_VERSION}'
+  args: ['init', '-backend-config=bucket=${PROJECT_ID}_terraform']
+  env:
+    - 'GOOGLE_CLOUD_PROJECT=$PROJECT_ID'
+- id: 'tf-format'
+  name: 'gcr.io/${PROJECT_ID}/terraform:${_TERRAFORM_VERSION}'
+  args: ['fmt', '-list=true', '-write=false', '-diff=true', '-check=true', '.']
+  waitFor: ['tf-init']
+- id: 'tf-validate'
+  name: 'gcr.io/${PROJECT_ID}/terraform:${_TERRAFORM_VERSION}'
+  args: ['validate']
+  waitFor: ['tf-init']
+- id: 'tf-plan'
+  name: 'gcr.io/${PROJECT_ID}/terraform:${_TERRAFORM_VERSION}'
+  args: ['plan', '-lock=false', '-out=tfplan.binary']
+  waitFor: ['tf-init']
+- id: 'tf-convert-plan-to-json'
+  name: 'gcr.io/${PROJECT_ID}/terraform:${_TERRAFORM_VERSION}'
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - |-
+      terraform show -json tfplan.binary > tfplan.json
+  waitFor: ['tf-plan']
+- id: 'tf-validator'
+  name: 'gcr.io/${PROJECT_ID}/terraform-validator:${_TERRFORM_VALIDATOR_VERSION}'
+  args: ['validate', '--policy-path=policies/constraints', 'tfplan.json'] 
+  waitFor: ['tf-convert-plan-to-json'] 
