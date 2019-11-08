@@ -8,10 +8,6 @@ Prerequisites
 - GCP credentials (./credentials.json)
 - Google Cloud SDK
 
-- Build the [terraform validator Docker image](https://github.com/GoogleCloudPlatform/terraform-validator#integration)
-  - git clone https://github.com/GoogleCloudPlatform/terraform-validator
-  - cd terraform-validator
-  - make build-docker
 - Clone this repository
   - cd ..
   - git clone https://github.com/philjhale/terraform-validator-gcp.git
@@ -44,12 +40,15 @@ docker run -it -v `pwd`:/terraform-validator -v $POLICY_PATH:/policy-repo -v ${G
 
 ## Cloud Build setup
 
-Push required Docker images to Google Container Repository.
+Build the [terraform validator Docker image](https://github.com/GoogleCloudPlatform/terraform-validator#integration).
 ```
-docker pull hashicorp/terraform
-docker tag hashicorp/terraform gcr.io/$GOOGLE_PROJECT_ID/terraform
-docker push gcr.io/$GOOGLE_PROJECT_ID/terraform
+git clone https://github.com/GoogleCloudPlatform/terraform-validator
+cd terraform-validator
+make build-docker
+```
 
+Push to to Google Container Repository.
+```
 # Build terraform-validator Docker image
 docker tag terraform-validator gcr.io/$GOOGLE_PROJECT_ID/terraform-validator
 docker push gcr.io/$GOOGLE_PROJECT_ID/terraform-validator

@@ -3,24 +3,24 @@ substitutions:
   _TERRFORM_VALIDATOR_VERSION: latest
 steps:
 - id: 'tf-init'
-  name: 'gcr.io/${PROJECT_ID}/terraform:${_TERRAFORM_VERSION}'
+  name: 'hashicorp/terraform:${_TERRAFORM_VERSION}'
   args: ['init', '-backend-config=bucket=${PROJECT_ID}_terraform']
   env:
     - 'GOOGLE_CLOUD_PROJECT=$PROJECT_ID'
 - id: 'tf-format'
-  name: 'gcr.io/${PROJECT_ID}/terraform:${_TERRAFORM_VERSION}'
+  name: 'hashicorp/terraform:${_TERRAFORM_VERSION}'
   args: ['fmt', '-list=true', '-write=false', '-diff=true', '-check=true', '.']
   waitFor: ['tf-init']
 - id: 'tf-validate'
-  name: 'gcr.io/${PROJECT_ID}/terraform:${_TERRAFORM_VERSION}'
+  name: 'hashicorp/terraform:${_TERRAFORM_VERSION}'
   args: ['validate']
   waitFor: ['tf-init']
 - id: 'tf-plan'
-  name: 'gcr.io/${PROJECT_ID}/terraform:${_TERRAFORM_VERSION}'
+  name: 'hashicorp/terraform:${_TERRAFORM_VERSION}'
   args: ['plan', '-lock=false', '-out=tfplan.binary']
   waitFor: ['tf-init']
 - id: 'tf-convert-plan-to-json'
-  name: 'gcr.io/${PROJECT_ID}/terraform:${_TERRAFORM_VERSION}'
+  name: 'hashicorp/terraform:${_TERRAFORM_VERSION}'
   entrypoint: 'sh'
   args:
     - '-c'
