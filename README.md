@@ -64,6 +64,6 @@ gcloud builds submit .
 - [Terraform validator repo](https://github.com/GoogleCloudPlatform/terraform-validator)
 - [How to use Terraform Validator](https://github.com/forseti-security/policy-library/blob/master/docs/user_guide.md#how-to-use-terraform-validator)
 - Google blog series
-    - [Protecting your GCP infrastructure at scale with Forseti Config Validator(https://cloud.google.com/blog/products/identity-security/protecting-your-gcp-infrastructure-at-scale-with-forseti-config-validator)
+    - [Protecting your GCP infrastructure at scale with Forseti Config Validator](https://cloud.google.com/blog/products/identity-security/protecting-your-gcp-infrastructure-at-scale-with-forseti-config-validator)
     - [Protecting your GCP infrastructure at scale with Forseti Config Validator part two: Scanning for labels](https://cloud.google.com/blog/products/identity-security/protecting-your-gcp-infrastructure-at-scale-with-forseti-config-validator-part-two-scanning-for-labels)
     - [Protecting your GCP infrastructure at scale with Forseti Config Validator part three: Writing your own policy](https://cloud.google.com/blog/products/identity-security/protecting-your-gcp-infrastructure-with-forseti-config-validator-part-three-writing-your-own-policy)
