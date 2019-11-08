@@ -1,5 +1,7 @@
 # terraform-validator-gcp
 
+Playground for [terraform-validator](https://github.com/GoogleCloudPlatform/terraform-validator).
+
 ## Local setup
 
 Prerequisites
@@ -59,7 +61,6 @@ make build-docker
 
 Push to to Google Container Repository.
 ```
-# Build terraform-validator Docker image
 docker tag terraform-validator gcr.io/$GOOGLE_PROJECT_ID/terraform-validator
 docker push gcr.io/$GOOGLE_PROJECT_ID/terraform-validator
 ```
