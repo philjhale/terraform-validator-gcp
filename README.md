@@ -12,6 +12,9 @@ Prerequisites
   - git clone https://github.com/GoogleCloudPlatform/terraform-validator
   - cd terraform-validator
   - make build-docker
+- Clone this repository
+  - cd ..
+  - git clone https://github.com/philjhale/terraform-validator-gcp.git
 - Clone policy library
   - cd ..
   - git clone https://github.com/philjhale/terraform-validator-policy-library.git
