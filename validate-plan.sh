@@ -1,0 +1,2 @@
+#!/bin/sh
+docker run -it -v `pwd`:/work -v $POLICY_PATH:/policy-repo --env GOOGLE_APPLICATION_CREDENTIALS=/work/credentials.json terraform-validator validate --policy-path=/policy-repo/ /work/terraform.tfplan.json
