@@ -27,6 +27,7 @@ steps:
     - |-
       terraform show -json tfplan.binary > tfplan.json
   waitFor: ['tf-plan']
+# TODO Update args and figure out how to make this work
 - id: 'tf-validator'
   name: 'gcr.io/${PROJECT_ID}/terraform-validator:${_TERRFORM_VALIDATOR_VERSION}'
   args: ['validate', '--policy-path=policies/constraints', 'tfplan.json'] 
