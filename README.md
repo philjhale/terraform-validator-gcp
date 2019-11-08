@@ -14,15 +14,14 @@ Prerequisites
   - make build-docker
 - Clone policy library
   - cd ..
-  - git clone https://github.com/forseti-security/policy-library
-  - Copy any constraints into the polices/constraints directory
+  - git clone https://github.com/philjhale/terraform-validator-policy-library.git
 
 ```
 export GOOGLE_PROJECT_ID=my-project-id
 export TF_VAR_google_project_id=my-project-id
 export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/credentials.json
 # Points to clone of https://github.com/forseti-security/policy-library
-export POLICY_PATH=$(pwd)/../policy-library 
+export POLICY_PATH=$(pwd)/../terraform-validator-policy-library
 
 terraform init -backend-config=bucket=${GOOGLE_PROJECT_ID}_terraform
 terraform plan --out=terraform.tfplan

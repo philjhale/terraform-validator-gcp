@@ -4,7 +4,7 @@ module "gcs_buckets" {
   names      = ["bucket-1"]
   prefix     = ""
   labels = {
-    team  = "team-a"
+    team  = "team-z"
     env   = "dev"
     owner = "me"
   }
