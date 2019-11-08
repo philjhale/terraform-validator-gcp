@@ -41,6 +41,13 @@ terraform show -json ./terraform.tfplan > ./terraform.tfplan.json
 docker run -it -v `pwd`:/work -v $POLICY_PATH:/policy-repo --env TEST_PROJECT=${GOOGLE_PROJECT_ID} --env GOOGLE_APPLICATION_CREDENTIALS=/work/credentials.json terraform-validator validate --policy-path=/policy-repo/ /work/terraform.tfplan.json
 ```
 
+Play with the labels in `storage.tf` to introduce policy violations. The rules are defined in `terraform-validator-policy-library/policies/constraints/bucket_enforce_labels.yaml`. A Terraform plan JSON file must be generated each time the Terraform code changes. Example output if a policy violation is found:
+```
+Found Violations:
+
+Constraint require_labels on resource //storage.googleapis.com/bucket-1: //storage.googleapis.com/bucket-1's label 'team' is in violation.
+```
+
 Debugging and errors.
 ```
 # You may get an error saying the resource manager API isn't enable. If so, enable it
